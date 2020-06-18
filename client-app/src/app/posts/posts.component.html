@@ -1,0 +1,35 @@
+
+<h4>Posts</h4>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+
+<mat-table  #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Post Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userId">
+        <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.userId}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.title}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="body">
+        <mat-header-cell *matHeaderCellDef> Body </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.body}}</mat-cell>
+      </ng-container>
+      
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click) = "rowClicked(row)"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25]">
+</mat-paginator>

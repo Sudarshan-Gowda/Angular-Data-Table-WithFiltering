@@ -1,0 +1,55 @@
+<div *ngIf="!isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<h4>Post Detail for: {{post.id}}</h4>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">
+          <b>User/Autor:</b> {{post.userId}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <b>{{post.title}}:</b><p>{{post.body}}</p>
+        </div>
+      </div>
+</div>
+<hr>
+
+<h2>Comments</h2>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<mat-table  #table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.id}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="body">
+      <mat-header-cell *matHeaderCellDef> Body </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.body}}</mat-cell>
+    </ng-container>
+    
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator [length]="5" [pageSize]="4" [pageSizeOptions]="[5, 10, 25]">
+</mat-paginator>
